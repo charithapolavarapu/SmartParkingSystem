@@ -8,10 +8,12 @@ A Java and MySQL based Smart Parking Management System that manages parking slot
 - Park vehicles based on vehicle type
 - Supports Car, Bike, and EV
 - Automatically assigns an available parking slot
-- Record vehicle entry time
-- Record vehicle exit time
-- Calculate parking fees
-- Store vehicle and parking information in MySQL
+- Prevents duplicate parking of the same vehicle
+- Records vehicle entry time
+- Records vehicle exit time
+- Calculates parking fees automatically
+- Stores parking information in MySQL
+- Loads parking data from MySQL when the application starts
 - View complete parking records
 - Parking dashboard showing:
   - Total slots
@@ -48,4 +50,3 @@ SmartParkingSystem/
 │   └── mysql-connector-j-26.7.0.jar
 ├── .gitignore
 └── README.md
-
