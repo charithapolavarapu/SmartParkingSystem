@@ -915,7 +915,84 @@ public class ParkingManager {
             vehicleNumber
         );
     }
+    public void searchParkingHistoryByDate(String date) {
 
+        String sql =
+            "SELECT vehicle_number, slot_number, " +
+            "entry_time, exit_time, parking_fee " +
+            "FROM parking_records " +
+            "WHERE DATE(entry_time) = ?";
+
+        try (
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, date);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                boolean found = false;
+
+                System.out.println();
+                System.out.println(
+                    "===== PARKING HISTORY FOR " + date + " ====="
+                );
+
+                while (rs.next()) {
+
+                    found = true;
+
+                    System.out.println(
+                        "Vehicle Number : " +
+                        rs.getString("vehicle_number")
+                    );
+
+                    System.out.println(
+                        "Slot           : " +
+                        rs.getString("slot_number")
+                    );
+
+                    System.out.println(
+                        "Entry Time     : " +
+                        rs.getTimestamp("entry_time")
+                    );
+
+                    System.out.println(
+                        "Exit Time      : " +
+                        rs.getTimestamp("exit_time")
+                    );
+
+                    System.out.println(
+                        "Parking Fee    : Rs." +
+                        rs.getDouble("parking_fee")
+                    );
+
+                    System.out.println(
+                        "--------------------------------"
+                    );
+                }
+
+                if (!found) {
+                    System.out.println(
+                        "No parking history found for this date."
+                    );
+                }
+
+                System.out.println(
+                    "================================"
+                );
+            }
+
+        } catch (Exception e) {
+
+            System.out.println(
+                "Error searching parking history."
+            );
+
+            e.printStackTrace();
+        }
+    }
 }
                
 
