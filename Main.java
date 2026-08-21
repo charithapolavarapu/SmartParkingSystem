@@ -5,6 +5,13 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        boolean loggedIn = AdminLogin.login();
+
+    if (!loggedIn) {
+        System.out.println("Access denied.");
+        System.out.println("Exiting Smart Parking System.");
+        return;
+    }
 
         ParkingManager manager = new ParkingManager();
 
@@ -22,6 +29,8 @@ public class Main {
             System.out.println("4. View Parking Records");
             System.out.println("5. Parking Dashboard");
             System.out.println("6. Exit");
+            System.out.println("7. Search Parking Record");
+
 
             System.out.print("\nEnter your choice: ");
 
@@ -98,6 +107,16 @@ public class Main {
                         + "Smart Parking System!"
                     );
 
+                    break;
+                    case 7:
+                        System.out.print(
+                        "Enter Vehicle Number: "
+                    );
+                    String searchNumber =
+                    sc.nextLine();
+                    manager.searchParkingRecord(
+                        searchNumber
+                    );
                     break;
                 default:
 

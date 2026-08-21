@@ -841,9 +841,82 @@ public class ParkingManager {
             "Total Revenue   : Rs." +
             totalRevenue
         );
-
-        System.out.println(
+                System.out.println(
             "================================"
         );
     }
+
+    // ============================================
+    // SEARCH PARKING RECORD
+    // ============================================
+
+    public void searchParkingRecord(String vehicleNumber) {
+
+        for (ParkingRecord record : records) {
+
+            if (record.getVehicle()
+                    .getVehicleNumber()
+                    .equalsIgnoreCase(vehicleNumber)) {
+
+                System.out.println();
+                System.out.println("===== PARKING RECORD FOUND =====");
+
+                System.out.println(
+                    "Vehicle Number : " +
+                    record.getVehicle().getVehicleNumber()
+                );
+
+                System.out.println(
+                    "Owner Name     : " +
+                    record.getVehicle().getOwnerName()
+                );
+
+                System.out.println(
+                    "Vehicle Type   : " +
+                    record.getVehicle().getVehicleType()
+                );
+
+                System.out.println(
+                    "Slot           : " +
+                    record.getSlot().getSlotId()
+                );
+
+                System.out.println(
+                    "Entry Time     : " +
+                    record.getEntryTime()
+                );
+
+                if (record.getExitTime() == null) {
+                    System.out.println(
+                        "Exit Time      : Still Parked"
+                    );
+                } else {
+                    System.out.println(
+                        "Exit Time      : " +
+                        record.getExitTime()
+                    );
+                }
+
+                System.out.println(
+                    "Parking Fee    : Rs." +
+                    record.getParkingFee()
+                );
+
+                System.out.println(
+                    "================================"
+                );
+
+                return;
+            }
+        }
+
+        System.out.println(
+            "No parking record found for vehicle: " +
+            vehicleNumber
+        );
+    }
+
 }
+               
+
+        
