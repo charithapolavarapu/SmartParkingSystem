@@ -87,3 +87,56 @@ SmartParkingSystem/
 **Polavarapu Prem Charitha**
 
 B.Tech – Artificial Intelligence & Machine Learning
+## 🗄️ Database Design
+
+The Smart Parking Management System uses **MySQL** to store and manage parking information.
+
+### Database Tables
+
+#### 1. `vehicles`
+
+Stores information about vehicles using the parking system.
+
+| Column | Description |
+|---|---|
+| vehicle_number | Unique vehicle registration number |
+| owner_name | Name of the vehicle owner |
+| vehicle_type | Type of vehicle (Car/Bike/EV) |
+
+#### 2. `parking_slots`
+
+Stores information about available and occupied parking slots.
+
+| Column | Description |
+|---|---|
+| slot_number | Unique parking slot number |
+| vehicle_type | Vehicle type supported by the slot |
+| is_occupied | Indicates whether the slot is occupied |
+
+#### 3. `parking_records`
+
+Stores vehicle parking history.
+
+| Column | Description |
+|---|---|
+| vehicle_number | Vehicle registration number |
+| slot_number | Assigned parking slot |
+| entry_time | Vehicle entry date and time |
+| exit_time | Vehicle exit date and time |
+| parking_fee | Calculated parking fee |
+
+### Database Relationship
+
+```text
+        VEHICLES
+            |
+            | vehicle_number
+            |
+            v
+    PARKING_RECORDS
+            |
+            | slot_number
+            |
+            v
+      PARKING_SLOTS
+🗄️ Database Design
