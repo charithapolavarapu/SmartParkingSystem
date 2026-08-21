@@ -703,150 +703,221 @@ public class ParkingManager {
     // ============================================
     // DISPLAY PARKING RECORDS
     // ============================================
+public void displayRecords() {
 
-    public void displayRecords() {
+    System.out.println(
+        "\n===== PARKING RECORDS ====="
+    );
+
+    if (records.isEmpty()) {
 
         System.out.println(
-            "\n===== PARKING RECORDS ====="
+            "No parking records found."
         );
 
-        if (records.isEmpty()) {
+        return;
+    }
 
-            System.out.println(
-                "No parking records found."
-            );
+    for (ParkingRecord record : records) {
 
-            return;
-        }
+        record.displayRecord();
+    }
+}
+// ============================================
+// PARKING DASHBOARD
+// ============================================
 
-        for (ParkingRecord record : records) {
+public void displayDashboard() {
 
-            record.displayRecord();
+    int totalSlots = slots.size();
+
+    int occupiedSlots = 0;
+
+    int carsParked = 0;
+    int bikesParked = 0;
+    int evsParked = 0;
+
+    int totalCars = 0;
+    int totalBikes = 0;
+    int totalEVs = 0;
+
+    double carRevenue = 0;
+    double bikeRevenue = 0;
+    double evRevenue = 0;
+
+    // Count occupied slots
+    for (ParkingSlot slot : slots) {
+
+        if (slot.isOccupied()) {
+            occupiedSlots++;
         }
     }
 
-    // ============================================
-    // PARKING DASHBOARD
-    // ============================================
+    // Analyze parking records
+    for (ParkingRecord record : records) {
 
-    public void displayDashboard() {
+        String type =
+            record.getVehicle().getVehicleType();
 
-        int totalSlots =
-            slots.size();
+        // Currently parked vehicles
+        if (record.getExitTime() == null) {
 
-        int occupiedSlots = 0;
+            if (type.equalsIgnoreCase("Car")) {
+                carsParked++;
 
-        int cars = 0;
-        int bikes = 0;
-        int evs = 0;
+            } else if (type.equalsIgnoreCase("Bike")) {
+                bikesParked++;
 
-        double totalRevenue = 0;
-
-        // Count occupied slots
-
-        for (ParkingSlot slot : slots) {
-
-            if (slot.isOccupied()) {
-
-                occupiedSlots++;
+            } else if (type.equalsIgnoreCase("EV")) {
+                evsParked++;
             }
         }
 
-        // Count currently parked vehicles
-        // and total revenue
+        // Total vehicle statistics and revenue
+        if (type.equalsIgnoreCase("Car")) {
 
-        for (ParkingRecord record : records) {
+            totalCars++;
 
             if (record.getExitTime() != null) {
-
-                totalRevenue +=
-                    record.getParkingFee();
+                carRevenue += record.getParkingFee();
             }
 
-            if (record.getExitTime() == null) {
+        } else if (type.equalsIgnoreCase("Bike")) {
 
-                String type =
-                    record.getVehicle()
-                          .getVehicleType();
+            totalBikes++;
 
-                if (type.equalsIgnoreCase("Car")) {
+            if (record.getExitTime() != null) {
+                bikeRevenue += record.getParkingFee();
+            }
 
-                    cars++;
+        } else if (type.equalsIgnoreCase("EV")) {
 
-                } else if (
-                    type.equalsIgnoreCase("Bike")
-                ) {
+            totalEVs++;
 
-                    bikes++;
-
-                } else if (
-                    type.equalsIgnoreCase("EV")
-                ) {
-
-                    evs++;
-                }
+            if (record.getExitTime() != null) {
+                evRevenue += record.getParkingFee();
             }
         }
-
-        int availableSlots =
-            totalSlots - occupiedSlots;
-
-        System.out.println(
-            "\n================================"
-        );
-
-        System.out.println(
-            "       PARKING DASHBOARD"
-        );
-
-        System.out.println(
-            "================================"
-        );
-
-        System.out.println(
-            "Total Slots     : " +
-            totalSlots
-        );
-
-        System.out.println(
-            "Occupied Slots  : " +
-            occupiedSlots
-        );
-
-        System.out.println(
-            "Available Slots : " +
-            availableSlots
-        );
-
-        System.out.println();
-
-        System.out.println(
-            "Cars Parked     : " +
-            cars
-        );
-
-        System.out.println(
-            "Bikes Parked    : " +
-            bikes
-        );
-
-        System.out.println(
-            "EVs Parked      : " +
-            evs
-        );
-
-        System.out.println();
-
-        System.out.println(
-            "Total Revenue   : Rs." +
-            totalRevenue
-        );
-                System.out.println(
-            "================================"
-        );
     }
 
-    // ============================================
+    double totalRevenue =
+        carRevenue + bikeRevenue + evRevenue;
+
+    int availableSlots =
+        totalSlots - occupiedSlots;
+
+    System.out.println(
+        "\n================================"
+    );
+
+    System.out.println(
+        "       PARKING DASHBOARD"
+    );
+
+    System.out.println(
+        "================================"
+    );
+
+    System.out.println(
+        "Total Slots     : " +
+        totalSlots
+    );
+
+    System.out.println(
+        "Occupied Slots  : " +
+        occupiedSlots
+    );
+
+    System.out.println(
+        "Available Slots : " +
+        availableSlots
+    );
+
+    System.out.println();
+
+    System.out.println(
+        "Currently Parked"
+    );
+
+    System.out.println(
+        "----------------------------"
+    );
+
+    System.out.println(
+        "Cars Parked     : " +
+        carsParked
+    );
+
+    System.out.println(
+        "Bikes Parked    : " +
+        bikesParked
+    );
+
+    System.out.println(
+        "EVs Parked      : " +
+        evsParked
+    );
+
+    System.out.println();
+
+    System.out.println(
+        "Vehicle Statistics"
+    );
+
+    System.out.println(
+        "----------------------------"
+    );
+
+    System.out.println(
+        "Total Cars      : " +
+        totalCars
+    );
+
+    System.out.println(
+        "Total Bikes     : " +
+        totalBikes
+    );
+
+    System.out.println(
+        "Total EVs       : " +
+        totalEVs
+    );
+
+    System.out.println();
+
+    System.out.println(
+        "Revenue by Vehicle Type"
+    );
+
+    System.out.println(
+        "----------------------------"
+    );
+
+    System.out.println(
+        "Car Revenue     : Rs." +
+        carRevenue
+    );
+
+    System.out.println(
+        "Bike Revenue    : Rs." +
+        bikeRevenue
+    );
+
+    System.out.println(
+        "EV Revenue      : Rs." +
+        evRevenue
+    );
+
+    System.out.println(
+        "Total Revenue   : Rs." +
+        totalRevenue
+    );
+
+    System.out.println(
+        "================================"
+    );
+}
+        // ============================================
     // SEARCH PARKING RECORD
     // ============================================
 
