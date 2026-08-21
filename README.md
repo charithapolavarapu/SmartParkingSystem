@@ -60,3 +60,30 @@ SmartParkingSystem/
 │
 ├── .gitignore
 └── README.md
+## 📸 Screenshots
+
+### 🅿️ Main Menu
+
+![Smart Parking System Main Menu](screenshots/parking-menu.png)
+
+### 📊 Parking Dashboard
+
+![Parking Dashboard](screenshots/dashboard.png)
+
+### 🔎 Search Parking Record
+
+![Search Parking Record](screenshots/search-record.png)
+
+### 📋 Parking Records
+
+![Parking Records](screenshots/parking-records.png)
+
+### 📅 Parking History by Date
+
+![Parking History by Date](screenshots/parking-history.png)
+
+## 👨‍💻 Author
+
+**Polavarapu Prem Charitha**
+
+B.Tech – Artificial Intelligence & Machine Learning
